@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Hernandez — Mechanical Design Engineer</title>
+  <meta name="description" content="Portfolio of Alex Hernandez, Mechanical Design Engineer. Projects in CFD, CAD, and manufacturing." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --body: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #e6e6e6;
+      --paper: #ffffff;
+      --soft: #f5f5f3;
+      --accent: #9b2c2c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--paper);
+      color: var(--body);
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Layout container — mimics a single-column document like the PDF */
+    .doc {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.75rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HEADER */
+    header {
+      padding-top: 2rem;
+      margin-bottom: 3.5rem;
+    }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    /* Section headings */
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.75rem;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      margin-bottom: 1rem;
+      margin-top: 3rem;
+    }
+    h3 {
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Figure / image placeholder blocks (since we don't have your actual PDF images) */
+    figure {
+      margin: 1.5rem 0;
+      background: var(--soft);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    figure .fig-label {
+      display: inline-block;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    figure .fig-note {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #a0a0a0;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+    /* Two-column figure row (for PDF-style image layouts) */
+    .fig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .fig-row figure { margin: 0; }
+
+    /* Project meta list (Problem / Role / Tools / Process / Result) */
+    .meta-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0;
+    }
+    .meta-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.85rem;
+      line-height: 1.7;
+    }
+    .meta-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .meta-list li strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Experience list */
+    .exp-list {
+      list-style: none;
+      padding: 0;
+    }
+    .exp-item {
+      border-left: 2px solid var(--rule);
+      padding-left: 1.25rem;
+      margin-bottom: 1.75rem;
+      transition: border-color 0.25s;
+    }
+    .exp-item:hover { border-left-color: var(--accent); }
+    .exp-item strong {
+      display: block;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+    .exp-item .exp-date {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .exp-item ul {
+      list-style: disc;
+      padding-left: 1.1rem;
+      font-size: 0.95rem;
+    }
+    .exp-item ul li { margin-bottom: 0.3rem; }
+
+    /* Links block */
+    .links-block p { margin-bottom: 0.5rem; }
+    .links-block a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .links-block a:hover { border-bottom-color: var(--accent); }
+
+    /* Divider between projects */
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--rule);
+      margin: 4rem 0 0;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer .page-num {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      .doc { padding: 2.5rem 1.25rem 4rem; }
+      .fig-row { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.8rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Alex Hernandez</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#links">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="doc">
+
+    <header>
+      <h1>Alex Hernandez</h1>
+      <p class="title">Mechanical Design Engineer</p>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About me</h2>
+      <p>I am an engineer raised in western Iowa with my BSME from Iowa State University. I have professional experience in aerospace and mechanical design industries, with a focus in manufacturing, rapid prototyping, and data analysis.</p>
+      <p>Over the past 5 years, I have gained valuable experience as a mechanical engineer through a Boeing sponsored project course called Make2Innovate and during my time at the Ames National Laboratory where I gained skills related to data analysis. I got accustomed to working in multi disciplinary teams and operating under strict deadlines.</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <!-- Project 1 -->
+      <h3>Reverse Engineering Manure Spreader</h3>
+
+      <div class="fig-row">
+        <figure>
+          <span class="fig-label">SolidWorks assembly</span>
+          <span class="fig-note">(replace with your frame-assembly screenshot)</span>
+        </figure>
+        <figure>
+          <span class="fig-label">Frame Design Flow Diagram</span>
+          <span class="fig-note">(replace with your flow-diagram image)</span>
+        </figure>
+      </div>
+
+      <ul class="meta-list">
+        <li><strong>Problem:</strong> Manufacturer faced high overhead and supply chain volatility due to reliance on European-sourced assemblies. Increased tariffs and large ordering requirements led to financial inefficiency and long lead times.</li>
+        <li><strong>Role:</strong> Was responsible for the technical documentation and cost-benefit analysis required to transition production to domestic suppliers. Aided in CAD modeling of the frame and manufacturing feasibility.</li>
+        <li><strong>Tools and methods:</strong> SolidWorks, FEA, DFMEA, Value Stream Mapping, Function Flow Block Diagrams</li>
+        <li><strong>Process:</strong> Performed teardown of the frame assembly to document critical tolerances, material specifications, and interface geometries.</li>
+        <li><strong>Result:</strong> Produced a full technical data package including 3D models and drawings for the assembly housing. Developed a sourcing strategy that reduced lead times.</li>
+      </ul>
+
+      <hr class="divider" />
+
+      <!-- Project 2 -->
+      <h3>FSAE Vehicle Suspension Optimization</h3>
+
+      <figure>
+        <span class="fig-label">Iowa State FSAE CR-28 vehicle</span>
+        <span class="fig-note">(replace with your car photo)</span>
+      </figure>
+
+      <div class="fig-row">
+        <figure>
+          <span class="fig-label">Roll axis / CG calculations</span>
+          <span class="fig-note">(replace with your SolidWorks sketch)</span>
+        </figure>
+        <figure>
+          <span class="fig-label">AIM Race Studio data</span>
+          <span class="fig-note">(replace with your telemetry screenshot)</span>
+        </figure>
+      </div>
+
+      <ul class="meta-list">
+        <li><strong>Problem:</strong> Optimize the suspension system of the Formula SAE CR-28 vehicle against real world data.</li>
+        <li><strong>Role:</strong> Used SolidWorks to determine physical parameters like the distance from the roll axis to the center of gravity. Analyzed front and rear wing configurations to estimate cornering efficiency and ensure the aero kit's mass and downforce.</li>
+        <li><strong>Tools:</strong> MATLAB, AIM Race Studio, SolidWorks</li>
+        <li><strong>Process:</strong> Used SolidWorks to calculate vehicle dimensions. Compared simulated lateral acceleration against real-world data captured via an AIM module during controlled skid pad testing.</li>
+        <li><strong>Result:</strong> Achieved a simulation accuracy within 5.8%, and predicted a 1.65g lateral acceleration compared to 1.56g observed in physical testing.</li>
+      </ul>
+
+      <hr class="divider" />
+
+      <!-- Project 3 -->
+      <h3>Make2Innovate — CyLaunch</h3>
+
+      <figure>
+        <span class="fig-label">Velocity &amp; pressure field — Simcenter STAR-CCM+</span>
+        <span class="fig-note">(replace with your CFD visualization)</span>
+      </figure>
+
+      <div class="fig-row">
+        <figure>
+          <span class="fig-label">Rocket mesh</span>
+          <span class="fig-note">(replace with your meshing screenshot)</span>
+        </figure>
+        <figure>
+          <span class="fig-label">Residuals convergence plot</span>
+          <span class="fig-note">(replace with your residuals chart)</span>
+        </figure>
+      </div>
+
+      <ul class="meta-list">
+        <li><strong>Problem:</strong> Design and build a rocket to compete in the NASA Student Launch Challenge.</li>
+        <li><strong>Role:</strong> Oversaw simulation operations of rocket (CR4IG) using Star CCM+, and facilitated in the design of the air brake assembly.</li>
+        <li><strong>Tools and methods:</strong> Star CCM+, SolidWorks, Arduino, C++, Rapid Prototyping</li>
+        <li><strong>Process:</strong> Developed rocket models in SolidWorks and performed Computational Fluid Dynamics (CFD) simulations in Star-CCM+ to analyze aerodynamic stability and pressure distributions.</li>
+        <li><strong>Result:</strong> Disqualified in the 2nd round of NASA competition due to parachute actuation issues causing safety concerns.</li>
+      </ul>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <ul class="exp-list">
+        <li class="exp-item">
+          <strong>CyLaunch</strong>
+          <span class="exp-date">January – May 2025</span>
+          <ul>
+            <li>Facilitated CAD design of the air brake assembly using SolidWorks.</li>
+            <li>Oversaw simulation operations of the rocket using Star CCM+ software.</li>
+            <li>Programmed actuation system using an Arduino board.</li>
+          </ul>
+        </li>
+        <li class="exp-item">
+          <strong>Ames National Laboratory</strong>
+          <span class="exp-date">June – August 2023</span>
+          <ul>
+            <li>Developed machine learning models to find patterns in large datasets.</li>
+            <li>Utilized Python libraries to do prediction modeling for possible new properties on materials for batteries.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2>Education</h2>
+      <ul class="exp-list">
+        <li class="exp-item">
+          <strong>Iowa State University</strong>
+          <span class="exp-date">August 2021 – May 2026</span>
+          <ul>
+            <li>B.S. Mechanical Engineering</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- LINKS -->
+    <section id="links" class="links-block">
+      <h2>Links</h2>
+      <p><strong>Email:</strong> <a href="mailto:realalexhernandez@gmail.com">realalexhernandez@gmail.com</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/alexhernandez721" target="_blank" rel="noopener">linkedin.com/in/alexhernandez721</a></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© 2026 Alex Hernandez</span>
+    <span class="page-num">Portfolio</span>
+  </footer>
+
+</body>
+</html>
